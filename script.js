@@ -68,7 +68,7 @@ function addCourse(event, course) {
 
 function addToCoursesHtml(course) {
     html = `<tr>
-                <th scope="row">1</th>
+                <th scope="row">${courses.length + 1}</th>
                 <td>${course.course_code}</td>
                 <td>${course.course_name}</td>
                 <td>${course.credit_load}</td>
