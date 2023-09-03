@@ -45,15 +45,19 @@ var tnu = 0; //Totsal Number Of Units
 
 
 function calculateGPA() {
-    for (let index = 0; index < courses.length; index++) {
-        cu_gp = parseFloat(courses[index].credit_load) * parseFloat(courses[index].grade);
-        tnu = tnu + parseFloat(courses[index].credit_load)
-        tcp = parseFloat(tcp) + parseFloat(cu_gp);
-        console.log(tcp, tnu, cu_gp)
+    if (validateCoursesArray()) {
+        calculatedGPA = loopAndCalculateGPA()
+        gpaHtml.innerHTML = calculatedGPA
+        return;
     }
-    gpaHtml.innerHTML = parseFloat(tcp/tnu);
+    gpaHtml.innerHTML = 0.0;
+    alert('Data not provided')
+    return;
 }
 
+function validateCoursesArray() {
+    return courses.length > 0
+}
 
 function addCourse(event, course) {
     addtoCourses(course)
@@ -97,4 +101,15 @@ function getPoint(grade) {
             return 0;
             break;
     }
+}
+
+function loopAndCalculateGPA(){
+    for (let index = 0; index < courses.length; index++) {
+        cu_gp = parseFloat(courses[index].credit_load) * parseFloat(courses[index].grade);
+        tnu = tnu + parseFloat(courses[index].credit_load)
+        tcp = parseFloat(tcp) + parseFloat(cu_gp);
+        console.log(tcp, tnu, cu_gp)
+    }
+    
+    return parseFloat(tcp/tnu);
 }
